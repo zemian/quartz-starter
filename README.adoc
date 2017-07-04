@@ -17,7 +17,28 @@ out the scheduler in any other DB, just create similar configuration and change 
 configuration settings. You will find many quartz configuration examples under
 `src/main/resources/zemian/quartz/examples` folder.
 
-= Examples
+
+= Requirements
+
+- Java 7 or higher
+- Maven 3.3 or higher
+- Postgres Database
+
+= Setup Postgres Database
+
+For convenience, there is a copy of schema script under `db/tables_postgres.sql`. For latest copy
+of this file, you should get it from the quartz project site.
+
+To prepare Postgres DB for quartz using default 'postgres' user, try the following:
+
+----
+postgres# create database quartz;
+postgres# \c quartz
+postgres# \c /path/to/quartz-zemian-examples/db/tables_postgres.sql
+----
+
+
+= Quartz Examples
 
 This project provide a reusable QuartzServer program that can take any quartz properties configuration
 file and run it as a server. You can press CTRL+C on console to stop it.
