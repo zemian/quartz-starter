@@ -26,17 +26,25 @@
     </dependency>
 
     <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>42.1.1</version>
     </dependency>
 
   </dependencies>
+
+  <profiles>
+    <!-- Extra profile for testing -->
+    <profile>
+      <id>hsqldb</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.hsqldb</groupId>
+          <artifactId>hsqldb</artifactId>
+          <version>2.4.0</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
   
 </project>
