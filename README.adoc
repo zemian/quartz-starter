@@ -34,7 +34,7 @@ To prepare Postgres DB for quartz using default 'postgres' user, try the followi
 ----
 postgres# create database quartz;
 postgres# \c quartz
-postgres# \c /path/to/quartz-zemian-examples/db/tables_postgres.sql
+postgres# \i /path/to/quartz-zemian-examples/db/tables_postgres.sql
 ----
 
 
