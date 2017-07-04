@@ -41,7 +41,7 @@ postgres# \i /path/to/quartz-zemian-examples/db/tables_postgres.sql
 = Quartz Examples
 
 This project provide a reusable QuartzServer program that can take any quartz properties configuration
-file and run it as a server. You can press CTRL+C on console to stop it.
+file and run it as a server. You can press `CTRL+C` keys on console to stop it.
 
 == RAM Scheduler
 
@@ -62,13 +62,14 @@ mvn exec:java -Dexec.mainClass=zemian.quartz.examples.QuartzServer -DquartzConfi
 == Inserting Jobs Programmatically Using API
 
 There are many ways to insert jobs into scheduler. One way is programmatically using the API. Quartz
-using same Scheduler interface as the server for inserting job. You just ensure NOT to start it if you
-do not want to run the jobs in this "client" program, but simply use the API to insert/update jobs.
+uses the same `org.quartz.Scheduler` interface as the server for inserting job. You just need to ensure
+NOT to start the scheduler instance since you are writing only a "client" program. Simply use the API to
+insert/update jobs and then exit.
 
-Here is an example of a client program that insert couple running jobs. You can change the quartz properties file
-to any of datastore you wish to insert the job into.
+Here is an example of a client program that insert couple running jobs. Note that you can use the same
+configuration file you pass to "server" side so you connect to the same datasource store.
 
-You should create a new client program with any jobs that you want to create and insert.
+You should create a new client program for each set of new jobs that you want to create and insert.
 
 ----
 mvn exec:java -Dexec.mainClass=zemian.quartz.examples.QuartzClient -DquartzConfig=zemian/quartz/examples/quartz-postgres.properties

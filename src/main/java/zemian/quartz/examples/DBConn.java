@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
+ * Just a DB conn test program.
+ *
  * Created by zemian on 7/4/17.
  */
 public class DBConn {

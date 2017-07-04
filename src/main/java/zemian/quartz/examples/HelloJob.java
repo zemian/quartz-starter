@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * A simple Quartz Job that logs a message. You may debug job data if there is any.
+ *
  * Created by zemian on 7/4/17.
  */
 public class HelloJob implements Job {

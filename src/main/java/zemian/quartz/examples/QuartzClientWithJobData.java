@@ -5,14 +5,19 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static zemian.quartz.examples.QuartzServer.CONFIG_KEY;
+import static zemian.quartz.examples.QuartzServer.DEFAULT_CONFIG;
+
 /**
+ * Example of Quartz client to add job that contains data map.
+ *
  * Created by zemian on 7/3/17.
  */
 public class QuartzClientWithJobData {
     private static Logger LOG = LoggerFactory.getLogger(QuartzClientWithJobData.class);
-    public static final String DEFAULT_CONFIG = "zemian/quartz/examples/quartz.properties";
+
     public static void main(String[] args) throws Exception {
-        String config = System.getProperty("quartzConfig",DEFAULT_CONFIG);
+        String config = System.getProperty(CONFIG_KEY, DEFAULT_CONFIG);
         Scheduler scheduler = new StdSchedulerFactory(config).getScheduler();
         try {
             String jobName = "HelloJobWithData";
