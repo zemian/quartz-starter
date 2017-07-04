@@ -22,7 +22,8 @@ public class QuartzServer {
             public void run() {
                 try {
                     LOG.info("Shutting down quartz server.");
-                    scheduler.shutdown();
+                    boolean waitForJobToCompleteFirst = true;
+                    scheduler.shutdown(waitForJobToCompleteFirst);
                 } catch (SchedulerException e) {
                     throw new RuntimeException("Failed to shutdown quartz server.", e);
                 }
