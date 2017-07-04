@@ -10,12 +10,23 @@ and you can easily test any of these in a Java properties file to explore the fe
 See http://www.quartz-scheduler.org/documentation/quartz-2.2.x/configuration for configuration
 details.
 
+This project configured Quartz library with Logback as the logger, and default to INFO level to
+STDOUT for log messages. You may edit the `src/main/resources/logback.xml` to increase
+the level to "DEBUG" if you wish to see more activities in action by the scheduler.
+
+We also test the scheduler with a PostgreSQL database as backend storage. If you wish to test
+out the scheduler in any other DB, just create similar configuration and change out the datasource
+configuration settings. You will find many quartz configuration examples under
+`src/main/resources/zemian/quartz/examples` folder.
 
 = Examples
 
+This project provide a reusable QuartzServer program that can take any quartz properties configuration
+file and run it as a server. You can press CTRL+C on console to stop it.
+
 == RAM Scheduler
 
-To run a quartz scheduler as a server using in memory, type the following:
+To run a quartz scheduler as a server using in memory storage, type the following:
 
 ----
 mvn exec:java -Dexec.mainClass=zemian.quartz.examples.QuartzServer -DquartzConfig=zemian/quartz/examples/quartz.properties
@@ -23,20 +34,22 @@ mvn exec:java -Dexec.mainClass=zemian.quartz.examples.QuartzServer -DquartzConfi
 
 == Postgres DB Scheduler
 
-To run a quartz scheduler as a server connecting to postgre DB, type the following:
+To run a quartz scheduler as a server connecting to postgres DB, type the following:
 
 ----
 mvn exec:java -Dexec.mainClass=zemian.quartz.examples.QuartzServer -DquartzConfig=zemian/quartz/examples/quartz-postgres.properties
 ----
 
-== Inserting Jobs
+== Inserting Jobs Programmatically Using API
 
-There are many ways to insert jobs into scheduler. One way is programmatically using the API.
-
-NOTE: You should NOT start the scheduler if you simply want to use API to insert jobs!
+There are many ways to insert jobs into scheduler. One way is programmatically using the API. Quartz
+using same Scheduler interface as the server for inserting job. You just ensure NOT to start it if you
+do not want to run the jobs in this "client" program, but simply use the API to insert/update jobs.
 
 Here is an example of a client program that insert couple running jobs. You can change the quartz properties file
 to any of datastore you wish to insert the job into.
+
+You should create a new client program with any jobs that you want to create and insert.
 
 ----
 mvn exec:java -Dexec.mainClass=zemian.quartz.examples.QuartzClient -DquartzConfig=zemian/quartz/examples/quartz-postgres.properties
