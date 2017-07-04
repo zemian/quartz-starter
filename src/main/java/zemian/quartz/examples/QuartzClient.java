@@ -17,11 +17,24 @@ public class QuartzClient {
         Scheduler scheduler = new StdSchedulerFactory(config).getScheduler();
         try {
             JobDetail job = JobBuilder.newJob(HelloJob.class).withIdentity("HelloJob").build();
-            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("HourlyTrigger")
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("HourlyTrigger", "HelloJob")
                     .withSchedule(CronScheduleBuilder.cronSchedule("0 0 * * * ?"))
                     .build();
-            scheduler.scheduleJob(job, trigger);
+            if (!scheduler.checkExists(trigger.getKey())) {
+                scheduler.scheduleJob(job, trigger);
+            }
             LOG.info("Created {} with {}", job.getKey(), trigger.getKey());
+
+            // Add another trigger with same existing job!
+            trigger = TriggerBuilder.newTrigger().withIdentity("Every5SecsTrigger", "HelloJob")
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
+                    .forJob("HelloJob")
+                    .build();
+            if (!scheduler.checkExists(trigger.getKey())) {
+                scheduler.scheduleJob(trigger);
+            }
+            LOG.info("Created {} with {}", job.getKey(), trigger.getKey());
+
         } finally {
             scheduler.shutdown();
         }
