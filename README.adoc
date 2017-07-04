@@ -1,20 +1,18 @@
 = Quartz Examples
 
-This project provide examples of Quartz Scheduler that demonstrate some of its features.
+This project provides examples of https://github.com/quartz-scheduler/quartz[Quartz Scheduler] that
+demonstrate some of its features.
 
-The Quartz Scheduler is a very flexible scheduling library, however it requires one to understand how it 
-work before you can effectively use it. The easiest way to learn is to explore these examles and then
-try something on your own. There are many configuration settings you can use to control the scheduler,
-and you can easily test any of these in a Java properties file to explore the features.
+The Quartz Scheduler is a very flexible scheduling library. The easiest way to learn is to explore some
+the examples provided here, and then try something on your own. There are many configuration settings
+you can use to control the scheduler, and you can easily test any of these in a Java properties file
+to explore the features.
 
-See http://www.quartz-scheduler.org/documentation/quartz-2.2.x/configuration for configuration
-details.
-
-This project configured Quartz library with Logback as the logger, and default to INFO level to
-STDOUT for log messages. You may edit the `src/main/resources/logback.xml` to increase
+This project configured Quartz library with https://logback.qos.ch[Logback] as the logger, and default
+to INFO level to STDOUT for log messages. You may edit the `src/main/resources/logback.xml` to increase
 the level to "DEBUG" if you wish to see more activities in action by the scheduler.
 
-We also test the scheduler with a PostgreSQL database as backend storage. If you wish to test
+The project also provided a default PostgreSQL database as backend storage. If you wish to test
 out the scheduler in any other DB, just create similar configuration and change out the datasource
 configuration settings. You will find many quartz configuration examples under
 `src/main/resources/zemian/quartz/examples` folder.
