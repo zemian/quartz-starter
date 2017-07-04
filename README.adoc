@@ -22,7 +22,7 @@ configuration settings. You will find many quartz configuration examples under
 
 - Java 7 or higher
 - Maven 3.3 or higher
-- Postgres Database
+- Postgres 9 or higher
 
 = Setup Postgres Database
 
