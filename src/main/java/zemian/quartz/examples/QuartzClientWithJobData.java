@@ -25,12 +25,11 @@ public class QuartzClientWithJobData {
                     .usingJobData("foo", "fooValue")
                     .usingJobData("color", "blue")
                     .build();
-            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("Every5SecsTrigger", jobName)
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("Every5SecsTrigger")
                     .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
                     .forJob(jobName)
                     .build();
             QuartzClient.safeAdd(scheduler, job, trigger);
-            LOG.info("Created {} with {}", job.getKey(), trigger.getKey());
         } finally {
             scheduler.shutdown();
         }

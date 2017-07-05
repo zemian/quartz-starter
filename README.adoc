@@ -74,3 +74,45 @@ You should create a new client program for each set of new jobs that you want to
 ----
 mvn exec:java -Dexec.mainClass=zemian.quartz.examples.QuartzClient -DquartzConfig=zemian/quartz/examples/quartz-postgres.properties
 ----
+
+== Inserting Jobs Using Scripts
+
+Writing Java client is not too hard, but it requires you to compile the code. Simple clients like above is a good
+fit for scripting. You can easily run script engine using Java platform. We have added Groovy script language
+to the project dependency, and you may try out our demo as documented here.
+
+NOTE: The `scripts/rungroovy.sh` is for MacOS or Linux only. For Windows, you would need to fix the classpath and
+try to run it with Cygwin.
+
+=== Groovy Scripting
+
+Step 1: Setup jars the first time
+
+----
+mvn dependency:copy-dependencies
+----
+
+Step 2: Run any scripts
+----
+CONFIG=zemian/quartz/examples/quartz-postgres.properties scripts/rungroovy.sh scripts/listJobs.groovy
+----
+
+Here is how we can pause and resume a job
+----
+CONFIG=zemian/quartz/examples/quartz-postgres.properties scripts/rungroovy.sh scripts/pauseJob.groovy HelloJob
+CONFIG=zemian/quartz/examples/quartz-postgres.properties scripts/rungroovy.sh scripts/resumeJob.groovy HelloJob
+----
+
+== Writing Dynamic Job
+
+Quartz job is implemented using Java, and you would need to recompile the code whenever you change the code.
+Often time we have small job that can be done using simple scripting. The simple syntax of Groovy for writing
+dynamic job is a very powerful way to create new quartz job. Our project included a `ScriptJob` class
+that let you reference a script file and execute it at runtime. Here is an example:
+
+Adding a HelloScriptJob
+----
+CONFIG=zemian/quartz/examples/quartz-postgres.properties scripts/rungroovy.sh scripts/newDurableScriptJob.groovy HelloScriptJob `pwd`/scripts/jobs/HelloScriptJob.groovy
+CONFIG=zemian/quartz/examples/quartz-postgres.properties scripts/rungroovy.sh scripts/newCronTrigger.groovy HelloScriptJob HourlyTrigger '0 0 * * * ?'
+----
+

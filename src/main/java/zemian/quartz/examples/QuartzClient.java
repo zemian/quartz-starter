@@ -2,7 +2,6 @@ package zemian.quartz.examples;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.spi.MutableTrigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +9,7 @@ import static zemian.quartz.examples.QuartzServer.CONFIG_KEY;
 import static zemian.quartz.examples.QuartzServer.DEFAULT_CONFIG;
 
 /**
- * Example of Quartz client to add couple of HelloJob's.
+ * Example of Quartz client to add few jobs.
  *
  * Created by zemian on 7/3/17.
  */
@@ -23,31 +22,46 @@ public class QuartzClient {
         try {
             String jobName = "HelloJob";
             JobDetail job = JobBuilder.newJob(HelloJob.class).withIdentity(jobName).build();
-            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("Every5SecsTrigger", jobName)
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("Every5SecsTrigger")
                     .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
                     .forJob(jobName)
                     .build();
             safeAdd(scheduler, job, trigger);
-            LOG.info("Created {} with {}", job.getKey(), trigger.getKey());
 
             // Add another trigger with same existing job!
-            trigger = TriggerBuilder.newTrigger().withIdentity("HourlyTrigger", jobName)
+            trigger = TriggerBuilder.newTrigger().withIdentity("HourlyTrigger")
                     .withSchedule(CronScheduleBuilder.cronSchedule("0 0 * * * ?"))
                     .forJob(jobName)
                     .build();
             safeAdd(scheduler, job, trigger);
-            LOG.info("Created {} with {}", job.getKey(), trigger.getKey());
 
+            // Add a durable job that does not have any triggers yet
+            jobName = "ScriptJob";
+            job = JobBuilder.newJob(ScriptJob.class).withIdentity(jobName)
+                    .storeDurably()
+                    .usingJobData("scriptEngine", "Groovy")
+                    .usingJobData("scriptText", "println('Hi, I am Groovy.');")
+                    .build();
+            scheduler.addJob(job, true); // replace existing if there is any.
+            LOG.info("Created/replaced {} with no trigger", job.getKey());
         } finally {
             scheduler.shutdown();
         }
     }
 
+    // Only schedule job if it does not already exist, else do nothing.
     public static void safeAdd(Scheduler scheduler, JobDetail job, Trigger trigger) throws SchedulerException {
-        if (scheduler.checkExists(job.getKey())) {
-            scheduler.scheduleJob(trigger);
-        } else {
+        boolean jobExists = scheduler.checkExists(job.getKey());
+        boolean triggerExists = scheduler.checkExists(trigger.getKey());
+
+        if (!jobExists && !triggerExists) {
             scheduler.scheduleJob(job, trigger);
+            LOG.info("Created trigger {} with new {}", trigger.getKey(), job.getKey());
+        } else if (jobExists && !triggerExists){
+            scheduler.scheduleJob(trigger);
+            LOG.info("Created trigger {} with existing {}", trigger.getKey(), job.getKey());
+        } else {
+            LOG.info("Already exists trigger {} with existing {}", trigger.getKey(), job.getKey());
         }
     }
 }

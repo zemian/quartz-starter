@@ -1,4 +1,4 @@
-package zemian.quartz.examples;
+package zemian.quartz.examples.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
