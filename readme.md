@@ -10,7 +10,7 @@ your own. There are many configuration settings you can use to control the
 scheduler, and you can easily test any of these in a Java properties file to
 explore the features.
 
-This project configured Quartz library with https://logback.qos.ch[Logback] as
+This project configured Quartz library with [Logback](https://logback.qos.ch) as
 the logger, and default to INFO level to STDOUT for log messages. You may edit
 the `src/main/resources/logback.xml` to increase the level to "DEBUG" if you
 wish to see more activities in action by the scheduler.
@@ -19,7 +19,7 @@ The project also provided a default PostgreSQL database as backend storage. If
 you wish to test out the scheduler in any other DB, just create similar
 configuration and change out the datasource configuration settings. You will
 find many quartz configuration examples under
-`src/main/resources/zemian/hello/quartz` folder.
+`src/main/resources/zemian/quartzextra` folder.
 
 NOTE: Quartz is a library, and it does not have good built-in out of the
 box services. This means you still would need to write some code to get it
@@ -65,7 +65,7 @@ mvn package
 ```
 
 This maven command will compile and package this project with a executable jar
-that will execute `zemian.hello.quartz.QuartzServer`.
+that will execute `zemian.quartzextra.QuartzServer`.
 
 ### InMemory Scheduler
 
@@ -103,7 +103,7 @@ to create and insert.
 
 ```
 java -cp target/hello-quartz-app.jar \
-  zemian.hello.quartz.QuartzHelloClient zemian/quartzextra/quartz-postgres.properties
+  zemian.quartzextra.QuartzHelloClient zemian/quartzextra/quartz-postgres.properties
 ```
 
 ### Inserting Jobs Using Scripts
