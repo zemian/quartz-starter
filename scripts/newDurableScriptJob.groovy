@@ -3,8 +3,8 @@
 
 import org.quartz.JobBuilder
 import org.quartz.impl.StdSchedulerFactory
-import zemian.quartz.examples.QuartzServer
-import zemian.quartz.examples.ScriptJob
+import zemian.hello.quartz.QuartzServer
+import zemian.hello.quartz.ScriptJob
 
 config = System.getProperty(QuartzServer.CONFIG_KEY, QuartzServer.DEFAULT_CONFIG)
 scheduler = new StdSchedulerFactory(config).getScheduler()

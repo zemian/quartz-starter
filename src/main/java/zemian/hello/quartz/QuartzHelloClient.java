@@ -1,20 +1,20 @@
-package zemian.quartz.examples;
+package zemian.hello.quartz;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static zemian.quartz.examples.QuartzServer.CONFIG_KEY;
-import static zemian.quartz.examples.QuartzServer.DEFAULT_CONFIG;
+import static zemian.hello.quartz.QuartzServer.CONFIG_KEY;
+import static zemian.hello.quartz.QuartzServer.DEFAULT_CONFIG;
 
 /**
  * Example of Quartz client to add few jobs.
  *
  * Created by zemian on 7/3/17.
  */
-public class QuartzClient {
-    private static Logger LOG = LoggerFactory.getLogger(QuartzClient.class);
+public class QuartzHelloClient {
+    private static Logger LOG = LoggerFactory.getLogger(QuartzHelloClient.class);
 
     public static void main(String[] args) throws Exception {
         String config = System.getProperty(CONFIG_KEY, DEFAULT_CONFIG);

@@ -1,4 +1,4 @@
-package zemian.quartz.examples;
+package zemian.hello.quartz;
 
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class QuartzServer {
     private static Logger LOG = LoggerFactory.getLogger(QuartzServer.class);
     public static final String CONFIG_KEY = "quartzConfig";
-    public static final String DEFAULT_CONFIG = "zemian/quartz/examples/quartz.properties";
+    public static final String DEFAULT_CONFIG = "zemian/hello/quartz/quartz.properties";
 
     public static void main(String[] args) throws Exception {
         String config = System.getProperty(CONFIG_KEY, DEFAULT_CONFIG);

@@ -1,4 +1,4 @@
-package zemian.quartz.examples.util;
+package zemian.hello.quartz.util;
 
 import javax.script.Bindings;
 import javax.script.ScriptEngine;

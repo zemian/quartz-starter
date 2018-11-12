@@ -2,7 +2,7 @@
 
 import org.quartz.impl.StdSchedulerFactory
 import org.quartz.impl.matchers.GroupMatcher
-import zemian.quartz.examples.QuartzServer
+import zemian.hello.quartz.QuartzServer
 
 config = System.getProperty(QuartzServer.CONFIG_KEY, QuartzServer.DEFAULT_CONFIG)
 scheduler = new StdSchedulerFactory(config).getScheduler()
