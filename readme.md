@@ -75,6 +75,9 @@ bin/runquartz.sh zemian/quartzextra/quartz.properties
 
 # Or simply default
 bin/runquartz.sh
+
+# Run default scheduler with DEBUG logging
+JAVA_OPTS="-Dlogback.configurationFile=logback-debug.xml" bin/runquartz.sh
 ```
 
 ### PostgreSQL DB Scheduler
@@ -102,8 +105,7 @@ You should create a new client program for each set of new jobs that you want
 to create and insert.
 
 ```
-java -cp target/hello-quartz-app.jar \
-  zemian.quartzextra.QuartzHelloClient zemian/quartzextra/postgres.properties
+bin/runjava.sh zemian.quartzextra.QuartzHelloClient zemian/quartzextra/postgres.properties
 ```
 
 ### Inserting Jobs Using Scripts
@@ -115,20 +117,14 @@ project dependency, and you may try out our demo as documented here.
 
 Example: List Jobs
 ```
-java -cp target/hello-quartz-app.jar \
-  groovy.ui.GroovyMain \
-  scripts/listJobs.groovy zemian/quartzextra/postgres.properties
+bin/rungroovy.sh scripts/listJobs.groovy zemian/quartzextra/postgres.properties
 ```
 
 Example: Pause and resume a job
 ```
-java -cp target/hello-quartz-app.jar \
-  groovy.ui.GroovyMain \
-  scripts/pauseJob.groovy zemian/quartzextra/postgres.properties
+bin/rungroovy.sh scripts/pauseJob.groovy zemian/quartzextra/postgres.properties
   
-java -cp target/hello-quartz-app.jar \
-  groovy.ui.GroovyMain \
-  scripts/resumeJob.groovy zemian/quartzextra/postgres.properties
+bin/rungroovy.sh scripts/resumeJob.groovy zemian/quartzextra/postgres.properties
 ```
 
 ### Writing Dynamic Job
@@ -141,15 +137,13 @@ a very powerful way to create new quartz job. Our project included a
 runtime. Here is an example:
 
 ```
-java -cp target/hello-quartz-app.jar \
-  groovy.ui.GroovyMain \
+bin/rungroovy.sh 
   scripts/newDurableScriptJob.groovy \
     zemian/quartzextra/postgres.properties \
     HelloScriptJob \
     scripts/jobs/HelloScriptJob.groovy
   
-java -cp target/hello-quartz-app.jar \
-  groovy.ui.GroovyMain \
+bin/rungroovy.sh 
   scripts/newCronTrigger.groovy \
     zemian/quartzextra/postgres.properties \
     HelloScriptJob HourlyTrigger '0 0 * * * ?'
