@@ -9,20 +9,13 @@ import java.util.Arrays;
  * main class.
  *
  * Usage:
- *
- * MainRunner MainClassName [arguments]
- *
- * For convenience, we default MainClassName to "zemian.hello.quartz.QuartzServer"
+ * MainRunner <mainClassName> [mainArguments]
  *
  */
 public class MainRunner {
     public static void main(String[] args) throws Exception {
-        String className = "zemian.hello.quartz.QuartzServer";
-        String[] mainArgs = args;
-        if (args.length > 0) {
-            className = args[0];
-            mainArgs = Arrays.copyOfRange(args, 1, args.length);
-        }
+        String className = args[0];
+        String[] mainArgs = Arrays.copyOfRange(args, 1, args.length);
         Class<?> mainClass = Class.forName(className);
         Method main = mainClass.getMethod("main", String[].class);
         main.invoke(null, new Object[]{mainArgs});
