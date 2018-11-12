@@ -2,9 +2,8 @@
 // args: triggerName
 import org.quartz.TriggerKey
 import org.quartz.impl.StdSchedulerFactory
-import zemian.quartzextra.QuartzServer
 
-config = System.getProperty(QuartzServer.CONFIG_KEY, QuartzServer.DEFAULT_CONFIG)
+config = args[0]
 scheduler = new StdSchedulerFactory(config).getScheduler()
 try {
     triggerKey = TriggerKey.triggerKey(args[0])

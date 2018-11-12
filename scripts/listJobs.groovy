@@ -2,9 +2,8 @@
 
 import org.quartz.impl.StdSchedulerFactory
 import org.quartz.impl.matchers.GroupMatcher
-import zemian.quartzextra.QuartzServer
 
-config = System.getProperty(QuartzServer.CONFIG_KEY, QuartzServer.DEFAULT_CONFIG)
+config = args[0]
 scheduler = new StdSchedulerFactory(config).getScheduler()
 try {
     keys = scheduler.getJobKeys(GroupMatcher.anyGroup())
