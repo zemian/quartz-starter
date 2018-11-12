@@ -71,10 +71,10 @@ that will execute `zemian.quartzextra.QuartzServer`.
 
 To run a quartz scheduler as a server using in memory storage:
 ```
-bin/runserver.sh zemian/quartzextra/quartz.properties
+bin/runquartz.sh zemian/quartzextra/quartz.properties
 
 # Or simply default
-bin/runserver.sh
+bin/runquartz.sh
 ```
 
 ### PostgreSQL DB Scheduler
@@ -83,7 +83,7 @@ To run a quartz scheduler as a server connecting to postgres DB, type the
 following:
 
 ```
-bin/runserver.sh zemian/quartzextra/postgres.properties
+bin/runquartz.sh zemian/quartzextra/postgres.properties
 ```
 
 ### Inserting Jobs Programmatically Using API
