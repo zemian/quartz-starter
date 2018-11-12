@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>zemian</groupId>
-    <artifactId>hello-quartz</artifactId>
+    <artifactId>quartz-extra</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -34,7 +34,7 @@
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>zemian.hello.quartz.QuartzServer</mainClass>
+                                    <mainClass>zemian.quartzextra.QuartzServer</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

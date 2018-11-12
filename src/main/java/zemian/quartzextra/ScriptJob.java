@@ -1,4 +1,4 @@
-package zemian.hello.quartz;
+package zemian.quartzextra;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;

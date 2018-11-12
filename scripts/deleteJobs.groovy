@@ -2,7 +2,7 @@
 // args: jobName ...
 import org.quartz.JobKey
 import org.quartz.impl.StdSchedulerFactory
-import zemian.hello.quartz.QuartzServer
+import zemian.quartzextra.QuartzServer
 
 config = System.getProperty(QuartzServer.CONFIG_KEY, QuartzServer.DEFAULT_CONFIG)
 scheduler = new StdSchedulerFactory(config).getScheduler()

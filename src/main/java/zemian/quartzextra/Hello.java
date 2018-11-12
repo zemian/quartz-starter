@@ -1,4 +1,4 @@
-package zemian.hello.quartz;
+package zemian.quartzextra;
 
 public class Hello {
     public static void main(String[] args) {

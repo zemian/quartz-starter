@@ -1,9 +1,10 @@
-package zemian.hello.quartz.util;
+package zemian.quartzextra.util;
 
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.io.FileReader;
+import java.util.Arrays;
 
 /**
  * Execute a JavaScript file and pass rest arguments into script engine.
@@ -18,8 +19,7 @@ public class RunJS {
             throw new IllegalArgumentException("Missing script file argument.");
         }
         String fileName = args[0];
-        String[] newArgs = new String[args.length - 1];
-        System.arraycopy(args, 1, newArgs, 0, newArgs.length);
+        String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
 
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
         Bindings bindings = engine.createBindings();

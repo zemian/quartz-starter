@@ -1,11 +1,11 @@
-package zemian.hello.quartz;
+package zemian.quartzextra;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static zemian.hello.quartz.QuartzServer.DEFAULT_CONFIG;
+import static zemian.quartzextra.QuartzServer.DEFAULT_CONFIG;
 
 /**
  * Example of Quartz client to add few jobs.

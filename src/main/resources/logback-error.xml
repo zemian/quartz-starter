@@ -5,10 +5,7 @@
         </encoder>
     </appender>
 
-    <root level="INFO">
+    <root level="ERROR">
         <appender-ref ref="STDOUT"/>
     </root>
-
-    <!--<logger name="zemian.quartzextra" level="DEBUG"/>-->
-
 </configuration>
