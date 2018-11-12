@@ -7,7 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A simple quartz server that bootstrap the scheduler and then sits and wait for jobs to be executed.
+ * A simple quartz server that bootstrap the scheduler and then sits and wait
+ * for jobs to be executed.
  *
  * Press CTRL+C on console to stop the server.
  *
@@ -15,11 +16,12 @@ import org.slf4j.LoggerFactory;
  */
 public class QuartzServer {
     private static Logger LOG = LoggerFactory.getLogger(QuartzServer.class);
-    public static final String CONFIG_KEY = "quartzConfig";
     public static final String DEFAULT_CONFIG = "zemian/hello/quartz/quartz.properties";
 
     public static void main(String[] args) throws Exception {
-        String config = System.getProperty(CONFIG_KEY, DEFAULT_CONFIG);
+        String config = DEFAULT_CONFIG;
+        if (args.length > 0)
+            config = args[0];
         final Scheduler scheduler = new StdSchedulerFactory(config).getScheduler();
 
         Runtime.getRuntime().addShutdownHook(new Thread() {

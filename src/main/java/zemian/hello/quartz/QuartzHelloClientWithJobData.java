@@ -5,7 +5,6 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static zemian.hello.quartz.QuartzServer.CONFIG_KEY;
 import static zemian.hello.quartz.QuartzServer.DEFAULT_CONFIG;
 
 /**
@@ -17,7 +16,9 @@ public class QuartzHelloClientWithJobData {
     private static Logger LOG = LoggerFactory.getLogger(QuartzHelloClientWithJobData.class);
 
     public static void main(String[] args) throws Exception {
-        String config = System.getProperty(CONFIG_KEY, DEFAULT_CONFIG);
+        String config = DEFAULT_CONFIG;
+        if (args.length > 0)
+            config = args[0];
         Scheduler scheduler = new StdSchedulerFactory(config).getScheduler();
         try {
             String jobName = "HelloJobWithData";

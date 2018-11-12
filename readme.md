@@ -56,31 +56,34 @@ psql> \d
 psql> \d qrtz_triggers
 ```
 
-
 ## Quartz Examples
 
-This project provides a reusable `QuartzServer` program that can take any
-quartz properties configuration file and run it as a server. You can press
-`CTRL+C` keys on console to stop it.
+### Building this project
+
+```
+mvn package
+```
+
+This maven command will compile and package this project with a executable jar
+that will execute `zemian.hello.quartz.QuartzServer`.
 
 ### InMemory Scheduler
 
-To run a quartz scheduler as a server using in memory storage, type the
-following:
-
+To run a quartz scheduler as a server using in memory storage:
 ```
-mvn exec:java -Dexec.mainClass=zemian.hello.quart.QuartzServer \
-  -DquartzConfig=zemian/hello/quartz/quartz.properties
+java -jar target/hello-quartz-app.jar zemian/hello/quartz/quartz.properties
+
+# Or simply default
+java -jar target/hello-quartz-app.jar
 ```
 
-### Postgres DB Scheduler
+### PostgreSQL DB Scheduler
 
 To run a quartz scheduler as a server connecting to postgres DB, type the
 following:
 
 ```
-mvn exec:java -Dexec.mainClass=zemian.hello.quart.QuartzServer \
-  -DquartzConfig=zemian/hello/quartz/quartz-postgres.properties
+java -jar target/hello-quartz-app.jar zemian/hello/quartz/quartz-postgres.properties
 ```
 
 ### Inserting Jobs Programmatically Using API
@@ -99,8 +102,8 @@ You should create a new client program for each set of new jobs that you want
 to create and insert.
 
 ```
-mvn exec:java -Dexec.mainClass=zemian.hello.quart.QuartzHelloClient \
-  -DquartzConfig=zemian/hello/quartz/quartz-postgres.properties
+java -cp target/hello-quartz-app.jar \
+  zemian.hello.quartz.QuartzHelloClient zemian/hello/quartz/quartz-postgres.properties
 ```
 
 ### Inserting Jobs Using Scripts
@@ -110,24 +113,22 @@ Simple clients like above is a good fit for scripting. You can easily run
 script engine using Java platform. We have added Groovy script language to the
 project dependency, and you may try out our demo as documented here.
 
-NOTE: The `scripts/rungroovy.sh` is for MacOS or Linux only. For Windows, you
-would need to fix the classpath and try to run it with Cygwin.
-
-Step 1: Setup jars the first time
-
+Example: List Jobs
 ```
-mvn dependency:copy-dependencies
+java -cp target/hello-quartz-app.jar \
+  groovy.ui.GroovyMain \
+  scripts/listJobs.groovy zemian/hello/quartz/quartz-postgres.properties
 ```
 
-Step 2: Run any scripts
+Example: Pause and resume a job
 ```
-CONFIG=zemian/hello/quartz/quartz-postgres.properties scripts/rungroovy.sh scripts/listJobs.groovy
-```
-
-Here is how we can pause and resume a job
-```
-CONFIG=zemian/hello/quartz/quartz-postgres.properties scripts/rungroovy.sh scripts/pauseJob.groovy HelloJob
-CONFIG=zemian/hello/quartz/quartz-postgres.properties scripts/rungroovy.sh scripts/resumeJob.groovy HelloJob
+java -cp target/hello-quartz-app.jar \
+  groovy.ui.GroovyMain \
+  scripts/pauseJob.groovy zemian/hello/quartz/quartz-postgres.properties
+  
+java -cp target/hello-quartz-app.jar \
+  groovy.ui.GroovyMain \
+  scripts/resumeJob.groovy zemian/hello/quartz/quartz-postgres.properties
 ```
 
 ### Writing Dynamic Job
@@ -140,6 +141,16 @@ a very powerful way to create new quartz job. Our project included a
 runtime. Here is an example:
 
 ```
-CONFIG=zemian/hello/quartz/quartz-postgres.properties scripts/rungroovy.sh scripts/newDurableScriptJob.groovy HelloScriptJob `pwd`/scripts/jobs/HelloScriptJob.groovy
-CONFIG=zemian/hello/quartz/quartz-postgres.properties scripts/rungroovy.sh scripts/newCronTrigger.groovy HelloScriptJob HourlyTrigger '0 0 * * * ?'
+java -cp target/hello-quartz-app.jar \
+  groovy.ui.GroovyMain \
+  scripts/newDurableScriptJob.groovy \
+    zemian/hello/quartz/quartz-postgres.properties \
+    HelloScriptJob \
+    scripts/jobs/HelloScriptJob.groovy
+  
+java -cp target/hello-quartz-app.jar \
+  groovy.ui.GroovyMain \
+  scripts/newCronTrigger.groovy \
+    zemian/hello/quartz/quartz-postgres.properties \
+    HelloScriptJob HourlyTrigger '0 0 * * * ?'
 ```
