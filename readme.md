@@ -83,7 +83,7 @@ To run a quartz scheduler as a server connecting to postgres DB, type the
 following:
 
 ```
-bin/runserver.sh zemian/quartzextra/quartz-postgres.properties
+bin/runserver.sh zemian/quartzextra/postgres.properties
 ```
 
 ### Inserting Jobs Programmatically Using API
@@ -103,7 +103,7 @@ to create and insert.
 
 ```
 java -cp target/hello-quartz-app.jar \
-  zemian.quartzextra.QuartzHelloClient zemian/quartzextra/quartz-postgres.properties
+  zemian.quartzextra.QuartzHelloClient zemian/quartzextra/postgres.properties
 ```
 
 ### Inserting Jobs Using Scripts
@@ -117,18 +117,18 @@ Example: List Jobs
 ```
 java -cp target/hello-quartz-app.jar \
   groovy.ui.GroovyMain \
-  scripts/listJobs.groovy zemian/quartzextra/quartz-postgres.properties
+  scripts/listJobs.groovy zemian/quartzextra/postgres.properties
 ```
 
 Example: Pause and resume a job
 ```
 java -cp target/hello-quartz-app.jar \
   groovy.ui.GroovyMain \
-  scripts/pauseJob.groovy zemian/quartzextra/quartz-postgres.properties
+  scripts/pauseJob.groovy zemian/quartzextra/postgres.properties
   
 java -cp target/hello-quartz-app.jar \
   groovy.ui.GroovyMain \
-  scripts/resumeJob.groovy zemian/quartzextra/quartz-postgres.properties
+  scripts/resumeJob.groovy zemian/quartzextra/postgres.properties
 ```
 
 ### Writing Dynamic Job
@@ -144,13 +144,13 @@ runtime. Here is an example:
 java -cp target/hello-quartz-app.jar \
   groovy.ui.GroovyMain \
   scripts/newDurableScriptJob.groovy \
-    zemian/quartzextra/quartz-postgres.properties \
+    zemian/quartzextra/postgres.properties \
     HelloScriptJob \
     scripts/jobs/HelloScriptJob.groovy
   
 java -cp target/hello-quartz-app.jar \
   groovy.ui.GroovyMain \
   scripts/newCronTrigger.groovy \
-    zemian/quartzextra/quartz-postgres.properties \
+    zemian/quartzextra/postgres.properties \
     HelloScriptJob HourlyTrigger '0 0 * * * ?'
 ```
