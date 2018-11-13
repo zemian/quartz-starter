@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# A script to invoke Groovy Scripts
+# A script to invoke QuartzServer
 #
-# Usage: scripts/runserver.sh <quartz-props-resource-name>
+# Usage: scripts/runquartz.sh <quartz-props-resource-name>
 #
 HOME_DIR=$(cd `dirname $0`/.. && pwd)
 $HOME_DIR/bin/runjava.sh zemian.quartzextra.QuartzServer "$@"
