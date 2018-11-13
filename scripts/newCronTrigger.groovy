@@ -1,5 +1,5 @@
 // Add a new CronTrigger to existing durable job.
-// args: jobName triggerName cronExpression
+// args: config jobName triggerName cronExpression
 
 import org.quartz.CronScheduleBuilder
 import org.quartz.TriggerBuilder
@@ -10,9 +10,9 @@ import org.quartz.impl.StdSchedulerFactory
 config = args[0]
 scheduler = new StdSchedulerFactory(config).getScheduler()
 try {
-    jobKey = JobKey.jobKey(args[0])
-    triggerKey = TriggerKey.triggerKey(args[1])
-    cronExpression = args[2]
+    jobKey = JobKey.jobKey(args[1])
+    triggerKey = TriggerKey.triggerKey(args[2])
+    cronExpression = args[3]
     trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
             .withSchedule(CronScheduleBuilder.cronSchedule(cronExpression))
             .forJob(jobKey)
