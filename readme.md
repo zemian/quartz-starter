@@ -19,7 +19,7 @@ The project also provided a default PostgreSQL database as backend storage. If
 you wish to test out the scheduler in any other DB, just create similar
 configuration and change out the datasource configuration settings. You will
 find many quartz configuration examples under
-`src/main/resources/zemian/quartzextra` folder.
+`src/main/resources/zemian/quartzstarter` folder.
 
 NOTE: Quartz is a library, and it does not have good built-in out of the
 box services. This means you still would need to write some code to get it
@@ -65,7 +65,7 @@ mvn package
 ```
 
 This maven command will compile and package this project with a executable jar
-that will execute `zemian.quartzextra.QuartzServer`.
+that will execute `zemian.quartzstarter.QuartzServer`.
 
 ### InMemory Scheduler
 
@@ -105,7 +105,7 @@ You should create a new client program for each set of new jobs that you want
 to create and insert.
 
 ```
-bin/runjava.sh zemian.quartzextra.QuartzHelloClient zemian/quartzextra/postgres.properties
+bin/runjava.sh zemian.quartzstarter.QuartzHelloClient zemian/quartzextra/postgres.properties
 ```
 
 ### Inserting Jobs Using Scripts
