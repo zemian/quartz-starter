@@ -3,7 +3,7 @@
 
 import org.quartz.JobBuilder
 import org.quartz.impl.StdSchedulerFactory
-import zemian.quartzextra.ScriptJob
+import zemian.quartzstarter.ScriptJob
 
 config = args[0]
 scheduler = new StdSchedulerFactory(config).getScheduler()

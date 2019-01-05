@@ -3,7 +3,7 @@
 
 import org.quartz.*
 import org.quartz.impl.StdSchedulerFactory
-import zemian.quartzextra.HelloJob
+import zemian.quartzstarter.HelloJob
 
 config = args[0]
 jobName = args[1]
