@@ -1,7 +1,7 @@
-## Hello Quartz
+## Quartz Starter
 
 This project provides examples for
-https://github.com/quartz-scheduler/quartz[Quartz Scheduler] that demonstrate
+[Quartz Scheduler](https://github.com/quartz-scheduler/quartz) that demonstrate
 some of its features.
 
 The Quartz Scheduler is a very flexible scheduling library. The easiest way to
@@ -27,8 +27,8 @@ started!
 
 ## Requirements
 
-- Java 7 or higher
-- Maven 3.3 or higher
+- Java 8 or higher
+- Maven 3.6 or higher
 - PostgreSQL 9 or higher
 
 ## Setup Postgres Database
