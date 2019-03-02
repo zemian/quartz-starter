@@ -1,0 +1,148 @@
+:toc:
+:toc-placement!:
+toc::[]
+
+== General Database Manual Setup Information
+
+Quartz provides JDBC Store that you may setup to scale your scheduler solution. Here we 
+provide some general tips on some specific database vendors. These are simply getting 
+started guide along with Quartz setup, and you should consult your database administrator 
+to best maintain and setup your data store need.
+
+NOTE: Please ensure you choose a better DB user password to secure your data.
+
+The Quartz distribution (or the source) contains many database vendors SQL schema files 
+that's ready for you to setup a new database. You should able to find one that is matching
+to your database vendor and use the DB tool to execute the statements to setup your database.
+The SQL files are located in `quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore` directory.
+
+== Using LiquiBase Tool
+
+https://www.liquibase.org
+
+Starting `quartz-2.3.1`, you may use Liquibase tool to setup your database for quartz. 
+The changelog xml file is located at `quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore/liquibase.quartz.init.xml`.
+
+NOTE: Liquibase tool would still require you to create and setup the database first. The tool assume
+a database with a valid DB user that can create the quartz tables. If you are not familiar with database setup in general, then you can see below sections for some of popular database vendors instructions. There we also show you how to setup the quartz tables manually without the need of Liquibase tool.
+
+There are many way to run Liquibase tool, and one way is to use Maven plugin. Our Quartz source
+has this setup as optional Profile that you may use. First, setup your Quartz database (we 
+assume you use PostgreSQL as mentioned above), then you may run maven on Quartz source like this:
+----
+./mvnw -pl quartz-core -P postgres-test \
+ -Dliquibase.username=quartz \
+ -Dliquibase.password=quartz123 \
+ -Dliquibase.url=jdbc:postgresql://localhost:5432/quartz \
+ liquibase:update
+----
+
+Liquibase can be use for many JDBC database vendors. If you are not using PostgreSQL, then ensure you use the correct JDBC driver in `pom.xml` file and change the connection string in above command accordingly.
+
+You can also drop all the DATA and your schema in the database with `liquibase:dropAll` maven phase.
+
+NOTE: The Liquibase tool will automatically ADD two additional tables 
+(`databasechangelog` and `databasechangeloglock`) into your database schema!
+
+If you already using Liquibase tool in your existing project, then you can simply make a copy and
+include the `liquibase.quartz.init.xml` file into your project.
+
+== PostgreSQL Database
+
+=== First Time PostgreSQL Server Setup
+
+https://www.postgresql.org
+
+PostgreSQL DB server can be download as portable zip file package. Following instructions will
+show you how to get it started.
+
+----
+# Init server data store
+cd postgresql-11.1-1-windows-x64-binaries
+mkdir pgdata
+pgsql/bin/pg_ctl --encoding=UTF8 -D pgdata init
+
+# Now we can start the server
+pgsql/bin/pg_ctl -D pgdata start
+----
+
+=== First Time Quartz Database Setup
+----
+pgsql/bin/pgsql -U postgres
+postgres=# create user quartz with password 'quartz123';
+postgres=# create database quartz with owner quartz;
+postgres=# \c quartz quartz
+quartz=> \i quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore/tables_postgres.sql
+----
+
+=== Quartz Configuration for PostgreSQL Example
+----
+org.quartz.scheduler.instanceName = PostgresScheduler
+org.quartz.scheduler.instanceId = AUTO
+
+org.quartz.threadPool.class = org.quartz.simpl.SimpleThreadPool
+org.quartz.threadPool.threadCount = 4
+
+org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX
+org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+org.quartz.jobStore.dataSource = quartzDS
+
+org.quartz.dataSource.quartzDS.driver = org.postgresql.Driver
+org.quartz.dataSource.quartzDS.URL = jdbc:postgresql://localhost:5432/quartz
+org.quartz.dataSource.quartzDS.user = quartz
+org.quartz.dataSource.quartzDS.password = quartz123
+----
+
+== MySQL Database
+
+=== First Time MySQL Server Setup
+
+The following example instructions is for MySQL 8 (With Zip Package)
+on a Windows + Cygwin Shell.
+
+----
+cd apps
+unzip mysql-8.0.15-winx64.zip
+cd mysql-8.0.15-winx64
+
+# Initialize data dir
+bin/mysqld --initialize --console
+# Note the random password generated for "root" user
+
+# Start Server
+bin/mysqld --console
+
+# Connect using another terminal as client using the random generated password
+bin/mysql -u root -p
+mysql> -- Now change root password
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
+----
+
+=== First Time Quartz Database Setup
+----
+mysql> -- Create a quartz db user and a database
+mysql> CREATE DATABASE quartz;
+mysql> CREATE USER 'quartz'@'localhost' IDENTIFIED BY 'quartz123';
+mysql> GRANT ALL ON quartz.* TO 'quartz'@'localhost';
+mysql> exit
+
+bin/mysql -u quartz -p quartz < quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore/tables_mysql_innodb.sql
+----
+
+=== Quartz Configuration For MySQL Example
+----
+org.quartz.scheduler.instanceName = MySQLScheduler
+org.quartz.scheduler.instanceId = AUTO
+
+org.quartz.threadPool.class = org.quartz.simpl.SimpleThreadPool
+org.quartz.threadPool.threadCount = 4
+
+org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX
+org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+org.quartz.jobStore.dataSource = quartzDS
+
+org.quartz.dataSource.quartzDS.driver = com.mysql.cj.jdbc.Driver
+org.quartz.dataSource.quartzDS.URL = jdbc:mysql://localhost:3306/quartz
+org.quartz.dataSource.quartzDS.user = quartz
+org.quartz.dataSource.quartzDS.password = quartz123
+----
