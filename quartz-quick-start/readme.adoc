@@ -8,8 +8,56 @@ We have configured the following:
 
 == Build and Run
 
+How to build and run on a command line
+
+----
   mvn compile
   mvn exec:java -Dexec.mainClass=zemian.quartzstarter.HelloQuartz
+  # Press CTRL+C to stop the scheduler
+----
+
+When running it successfully, youi should see something like this:
+
+----
+EMIANs-iMac:quartz-quick-start zemian$ mvn exec:java -Dexec.mainClass=zemian.quartzstarter.HelloQuartz
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< zemian:quartz-starter >------------------------
+[INFO] Building quartz-starter 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ quartz-starter ---
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: zemian.quartzstarter.HelloQuartz.main()
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.0 created.
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.0
+[zemian.quartzstarter.HelloQuartz.main()] INFO zemian.quartzstarter.HelloQuartz - Scheduler org.quartz.impl.StdScheduler@793282ff is starting.
+[zemian.quartzstarter.HelloQuartz.main()] INFO org.quartz.core.QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+[zemian.quartzstarter.HelloQuartz.main()] INFO zemian.quartzstarter.HelloQuartz - Scheduler org.quartz.impl.StdScheduler@793282ff started.
+[DefaultQuartzScheduler_Worker-1] INFO zemian.quartzstarter.HelloJob - Hello JobExecutionContext: trigger: 'DEFAULT.6da64b5bd2ee-ca5d3926-fde7-4e9d-a1ae-3faa7e093217 job: DEFAULT.helloJob fireTime: 'Thu Mar 21 12:38:12 EDT 2019 scheduledFireTime: Thu Mar 21 12:38:12 EDT 2019 previousFireTime: 'null nextFireTime: Thu Mar 21 12:38:15 EDT 2019 isRecovering: false refireCount: 0
+[DefaultQuartzScheduler_Worker-2] INFO zemian.quartzstarter.HelloJob - Hello JobExecutionContext: trigger: 'DEFAULT.6da64b5bd2ee-ca5d3926-fde7-4e9d-a1ae-3faa7e093217 job: DEFAULT.helloJob fireTime: 'Thu Mar 21 12:38:15 EDT 2019 scheduledFireTime: Thu Mar 21 12:38:15 EDT 2019 previousFireTime: 'Thu Mar 21 12:38:12 EDT 2019 nextFireTime: Thu Mar 21 12:38:18 EDT 2019 isRecovering: false refireCount: 0
+[DefaultQuartzScheduler_Worker-3] INFO zemian.quartzstarter.HelloJob - Hello JobExecutionContext: trigger: 'DEFAULT.6da64b5bd2ee-ca5d3926-fde7-4e9d-a1ae-3faa7e093217 job: DEFAULT.helloJob fireTime: 'Thu Mar 21 12:38:18 EDT 2019 scheduledFireTime: Thu Mar 21 12:38:18 EDT 2019 previousFireTime: 'Thu Mar 21 12:38:15 EDT 2019 nextFireTime: Thu Mar 21 12:38:21 EDT 2019 isRecovering: false refireCount: 0
+[DefaultQuartzScheduler_Worker-4] INFO zemian.quartzstarter.HelloJob - Hello JobExecutionContext: trigger: 'DEFAULT.6da64b5bd2ee-ca5d3926-fde7-4e9d-a1ae-3faa7e093217 job: DEFAULT.helloJob fireTime: 'Thu Mar 21 12:38:21 EDT 2019 scheduledFireTime: Thu Mar 21 12:38:21 EDT 2019 previousFireTime: 'Thu Mar 21 12:38:18 EDT 2019 nextFireTime: Thu Mar 21 12:38:24 EDT 2019 isRecovering: false refireCount: 0
+[DefaultQuartzScheduler_Worker-5] INFO zemian.quartzstarter.HelloJob - Hello JobExecutionContext: trigger: 'DEFAULT.6da64b5bd2ee-ca5d3926-fde7-4e9d-a1ae-3faa7e093217 job: DEFAULT.helloJob fireTime: 'Thu Mar 21 12:38:24 EDT 2019 scheduledFireTime: Thu Mar 21 12:38:24 EDT 2019 previousFireTime: 'Thu Mar 21 12:38:21 EDT 2019 nextFireTime: Thu Mar 21 12:38:27 EDT 2019 isRecovering: false refireCount: 0
+[DefaultQuartzScheduler_Worker-6] INFO zemian.quartzstarter.HelloJob - Hello JobExecutionContext: trigger: 'DEFAULT.6da64b5bd2ee-ca5d3926-fde7-4e9d-a1ae-3faa7e093217 job: DEFAULT.helloJob fireTime: 'Thu Mar 21 12:38:27 EDT 2019 scheduledFireTime: Thu Mar 21 12:38:27 EDT 2019 previousFireTime: 'Thu Mar 21 12:38:24 EDT 2019 nextFireTime: Thu Mar 21 12:38:30 EDT 2019 isRecovering: false refireCount: 0
+[DefaultQuartzScheduler_Worker-7] INFO zemian.quartzstarter.HelloJob - Hello JobExecutionContext: trigger: 'DEFAULT.6da64b5bd2ee-ca5d3926-fde7-4e9d-a1ae-3faa7e093217 job: DEFAULT.helloJob fireTime: 'Thu Mar 21 12:38:30 EDT 2019 scheduledFireTime: Thu Mar 21 12:38:30 EDT 2019 previousFireTime: 'Thu Mar 21 12:38:27 EDT 2019 nextFireTime: Thu Mar 21 12:38:33 EDT 2019 isRecovering: false refireCount: 0
+^C[Thread-2] INFO zemian.quartzstarter.HelloQuartz - Scheduler org.quartz.impl.StdScheduler@793282ff is shutting down.
+[Thread-2] INFO org.quartz.core.QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+[Thread-2] INFO org.quartz.core.QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+[Thread-2] INFO org.quartz.core.QuartzScheduler - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+----
+
 
 == To Enable DEBUG Logging
 
