@@ -1,0 +1,16 @@
+This is a quick start project exmaple for Quartz Scheduler
+
+We have configured the following:
+
+- Maven Build with JDK 1.8
+- Quartz Scheduler with slf4j-simple logger
+- HelloQuartz - a in memory scheduler example
+
+== Build and Run
+
+  mvn compile
+  mvn exec:java -Dexec.mainClass=zemian.quartzstarter.HelloQuartz
+
+== To Enable DEBUG Logging
+
+  mvn exec:java -Dexec.mainClass=zemian.quartzstarter.HelloQuartz -Dorg.slf4j.simpleLogger.defaultLogLevel=DEBUG
