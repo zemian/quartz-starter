@@ -1,0 +1,12 @@
+This is a quick start project exmaple for Quartz Scheduler
+using https://jitpack.io/#zemian/quartz as depedencies
+
+== Build and Run
+
+How to build and run on a command line
+
+----
+  mvn compile
+  mvn exec:java -Dexec.mainClass=zemian.quartzstarter.HelloQuartz
+  # Press CTRL+C to stop the scheduler
+----
