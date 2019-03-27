@@ -14,20 +14,22 @@
     </properties>
 
     <dependencies>
+        <!-- Quartz uses SLF4J, so we need an actual logger
+        NOTE: Placing this dep before Quartz will ensure we are using latest slf4j-api
+        as well.
+        -->
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-simple</artifactId>
+          <version>1.7.26</version>
+        </dependency>
+
         <!-- Quartz -->
         <dependency>
             <groupId>com.github.zemian.quartz</groupId>
             <artifactId>quartz</artifactId>
             <version>quartz-2.3.1</version>
         </dependency>
-
-        <!-- Quartz uses SLF4J, so we need an actual logger -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.26</version>
-        </dependency>
-
     </dependencies>
 
     <repositories>
