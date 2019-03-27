@@ -1,5 +1,16 @@
-This is a quick start project exmaple for Quartz Scheduler
-using https://jitpack.io/#zemian/quartz as depedencies
+This is a quickstart exmaple for Quartz Scheduler.
+
+We will use https://jitpack.io/#zemian/quartz as Maven repository.
+
+Sometimes the Official Quartz release is slow and they might not publish
+quick enough for you to test out a build. The zemian's JitPack repository
+provide immediate snapshot and pre-release for Quartz
+
+For official tags, it should provide equivalent binary.
+
+NOTE: Only `quartz-2.3.1` or higher is able to build from a plain vanilla JitPack server. 
+Older releases requires "svn" commands that fails to build in that env.
+
 
 == Build and Run
 
