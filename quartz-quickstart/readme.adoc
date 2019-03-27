@@ -1,4 +1,4 @@
-This is a quickstart exmaple for Quartz Scheduler.
+This is a quickstart example for Quartz Scheduler.
 
 We have configured the following:
 
