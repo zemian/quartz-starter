@@ -61,8 +61,10 @@ psql> \d qrtz_triggers
 ### Building this project
 
 ```
-mvn package
+mvn package -Ppostgres
 ```
+
+You may use `-Pmysql` profile if you are using MySQL DB instead.
 
 This maven command will compile and package this project with a executable jar
 that will execute `zemian.quartzstarter.QuartzServer`.
@@ -71,7 +73,7 @@ that will execute `zemian.quartzstarter.QuartzServer`.
 
 To run a quartz scheduler as a server using in memory storage:
 ```
-bin/runquartz.sh zemian/quartzextra/quartz.properties
+bin/runquartz.sh zemian/quartzstarter/quartz.properties
 
 # Or simply default
 bin/runquartz.sh
@@ -86,7 +88,7 @@ To run a quartz scheduler as a server connecting to postgres DB, type the
 following:
 
 ```
-bin/runquartz.sh zemian/quartzextra/postgres.properties
+bin/runquartz.sh zemian/quartzstarter/postgres.properties
 ```
 
 ### Inserting Jobs Programmatically Using API
@@ -105,7 +107,7 @@ You should create a new client program for each set of new jobs that you want
 to create and insert.
 
 ```
-bin/runjava.sh zemian.quartzstarter.QuartzHelloClient zemian/quartzextra/postgres.properties
+bin/runjava.sh zemian.quartzstarter.QuartzHelloClient zemian/quartzstarter/postgres.properties
 ```
 
 ### Inserting Jobs Using Scripts
@@ -117,14 +119,14 @@ project dependency, and you may try out our demo as documented here.
 
 Example: List Jobs
 ```
-bin/rungroovy.sh scripts/listJobs.groovy zemian/quartzextra/postgres.properties
+bin/rungroovy.sh scripts/listJobs.groovy zemian/quartzstarter/postgres.properties
 ```
 
 Example: Pause and resume a job
 ```
-bin/rungroovy.sh scripts/pauseJob.groovy zemian/quartzextra/postgres.properties
+bin/rungroovy.sh scripts/pauseJob.groovy zemian/quartzstarter/postgres.properties
   
-bin/rungroovy.sh scripts/resumeJob.groovy zemian/quartzextra/postgres.properties
+bin/rungroovy.sh scripts/resumeJob.groovy zemian/quartzstarter/postgres.properties
 ```
 
 ### Writing Dynamic Job
@@ -139,12 +141,17 @@ runtime. Here is an example:
 ```
 bin/rungroovy.sh 
   scripts/newDurableScriptJob.groovy \
-    zemian/quartzextra/postgres.properties \
+    zemian/quartzstarter/postgres.properties \
     HelloScriptJob \
     scripts/jobs/HelloScriptJob.groovy
   
 bin/rungroovy.sh 
   scripts/newCronTrigger.groovy \
-    zemian/quartzextra/postgres.properties \
+    zemian/quartzstarter/postgres.properties \
     HelloScriptJob HourlyTrigger '0 0 * * * ?'
 ```
+
+== How to run HirakiCP Demo
+
+  mvn package -Pmysql -Phikaricp
+  bin/runquartz.sh zemian/quartzstarter/mysql-hikaricp-quartz.properties
