@@ -29,7 +29,7 @@ started!
 
 - Java 8 or higher
 - Maven 3.6 or higher
-- PostgreSQL 9 or higher
+- PostgreSQL 9 or higher OR MySQL 8 or higher
 
 ## Setup Postgres Database
 
@@ -88,7 +88,7 @@ To run a quartz scheduler as a server connecting to postgres DB, type the
 following:
 
 ```
-bin/runquartz.sh zemian/quartzstarter/postgres.properties
+bin/runquartz.sh zemian/quartzstarter/postgres-quartz.properties
 ```
 
 ### Inserting Jobs Programmatically Using API
@@ -107,7 +107,7 @@ You should create a new client program for each set of new jobs that you want
 to create and insert.
 
 ```
-bin/runjava.sh zemian.quartzstarter.QuartzHelloClient zemian/quartzstarter/postgres.properties
+bin/runjava.sh zemian.quartzstarter.QuartzHelloClient zemian/quartzstarter/postgres-quartz.properties
 ```
 
 ### Inserting Jobs Using Scripts
@@ -119,14 +119,14 @@ project dependency, and you may try out our demo as documented here.
 
 Example: List Jobs
 ```
-bin/rungroovy.sh scripts/listJobs.groovy zemian/quartzstarter/postgres.properties
+bin/rungroovy.sh scripts/listJobs.groovy zemian/quartzstarter/postgres-quartz.properties
 ```
 
 Example: Pause and resume a job
 ```
-bin/rungroovy.sh scripts/pauseJob.groovy zemian/quartzstarter/postgres.properties
+bin/rungroovy.sh scripts/pauseJob.groovy zemian/quartzstarter/postgres-quartz.properties
   
-bin/rungroovy.sh scripts/resumeJob.groovy zemian/quartzstarter/postgres.properties
+bin/rungroovy.sh scripts/resumeJob.groovy zemian/quartzstarter/postgres-quartz.properties
 ```
 
 ### Writing Dynamic Job
@@ -141,13 +141,13 @@ runtime. Here is an example:
 ```
 bin/rungroovy.sh 
   scripts/newDurableScriptJob.groovy \
-    zemian/quartzstarter/postgres.properties \
+    zemian/quartzstarter/postgres-quartz.properties \
     HelloScriptJob \
     scripts/jobs/HelloScriptJob.groovy
   
 bin/rungroovy.sh 
   scripts/newCronTrigger.groovy \
-    zemian/quartzstarter/postgres.properties \
+    zemian/quartzstarter/postgres-quartz.properties \
     HelloScriptJob HourlyTrigger '0 0 * * * ?'
 ```
 

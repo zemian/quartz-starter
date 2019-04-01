@@ -16,5 +16,5 @@ export JAVA_OPTS=${JAVA_OPTS:="-Dlogback.configurationFile=logback-error.xml"}
 $HOME_DIR/bin/runjava.sh \
   groovy.ui.GroovyMain \
   $GROOVY_SCRIPT \
-  zemian/quartzextra/postgres.properties \
+  zemian/quartzextra/postgres-quartz.properties \
   "$@"

@@ -5,4 +5,4 @@
 # Usage: scripts/runquartz.sh
 #
 HOME_DIR=$(cd `dirname $0`/.. && pwd)
-$HOME_DIR/bin/runjava.sh zemian.quartzstarter.QuartzServer zemian/quartzextra/postgres.properties "$@"
+$HOME_DIR/bin/runjava.sh zemian.quartzstarter.QuartzServer zemian/quartzextra/postgres-quartz.properties "$@"
