@@ -155,3 +155,15 @@ bin/rungroovy.sh
 
   mvn package -Pmysql -Phikaricp
   bin/runquartz.sh zemian/quartzstarter/mysql-hikaricp-quartz.properties
+
+
+== How to view C3P0 Config Docs
+
+For Quartz 2.3.1, it uses c3p0 version 0.9.5.3. The doc can be viewed here:
+
+http://htmlpreview.github.io/?https://github.com/swaldman/c3p0/blob/c3p0-0.9.5.3/src/doc/index.html
+
+
+For Quartz 2.3.0 or older, it uses c3p0 version 0.9.5.2. The doc can be viewed here:
+
+http://htmlpreview.github.io/?https://github.com/swaldman/c3p0/blob/c3p0-0.9.5.2/src/doc/index.html
